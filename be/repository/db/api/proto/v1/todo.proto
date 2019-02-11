@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service TodoService {
+  rpc Create(CreateRequest) returns (Todo) {}
+  rpc Update(UpdateRequest) returns (Todo) {}
+  rpc Get(GetRequest) returns (Todo) {}
+  rpc List(Empty) returns (TodoList) {}
+  rpc Delete(DeleteRequest) returns (Empty) {}
+}
+
+message Empty {};
+
+message Todo {
+  string id = 1;
+  string title = 2;
+  google.protobuf.StringValue description = 3;
+  bool isCompleted = 4;
+  google.protobuf.BoolValue isCompletedWrapped = 5;
+  google.protobuf.Timestamp createdAtWrapped = 6;
+}
+
+message TodoList { repeated Todo todos = 1; }
+
+message CreateRequest { Todo todo = 1; }
+
+message UpdateRequest { Todo todo = 1; }
+
+message DeleteRequest { string id = 1; }
+
+message GetRequest { string id = 1; }
