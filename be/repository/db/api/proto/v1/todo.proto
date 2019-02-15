@@ -4,6 +4,7 @@ package v1;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-gotag/tagger/tagger.proto";
 
 service TodoService {
   rpc Create(CreateRequest) returns (Todo) {}
@@ -12,6 +13,33 @@ service TodoService {
   rpc List(Empty) returns (TodoList) {}
   rpc Delete(DeleteRequest) returns (Empty) {}
 }
+
+// enum FIELDS {
+//   ID = 1;
+//   TITLE = 2;
+//   DESCRIPTION = 3;
+//   IS_COMPLETED = 4;
+//   IS_COMPLETED_WRAPPED = 5;
+//   CREATED_AT_WRAPPED = 6;
+// }
+
+// enum VALUE_TYPE{
+//   STRING=1;
+// }
+
+// message FieldValueType{
+//   FIELDS fieldId=1;
+//   VALUE_TYPE valueType=2;
+// }
+
+// message Todo { repeated FieldValueType fvt=1;}
+
+enum MONGO_UPDATE_OP {
+  SET = 1;
+  UNSET = 2;
+}
+
+message UpdateOP { MONGO_UPDATE_OP op = 1;  }
 
 message Empty {};
 

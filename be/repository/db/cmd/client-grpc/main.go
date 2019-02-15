@@ -52,34 +52,32 @@ func main() {
 	}
 	log.Printf("Create result: <%+v>\n\n", res1)
 
-	// id := res1.Id
+	id := res1.Id
 	// Call Create
 
 	// Read
-	// req2 := &v1.GetRequest{
-	// 	Id: "aaa",
-	// }
-	// res2, err := c.Get(ctx, req2)
-	// if err != nil {
-	// 	log.Fatalf("Read failed: %v", err)
-	// }
-	// log.Printf("Read result: <%+v>\n\n", res2)
+	req2 := &v1.GetRequest{
+		Id: id,
+	}
+	res2, err := c.Get(ctx, req2)
+	if err != nil {
+		log.Fatalf("Read failed: %v", err)
+	}
+	log.Printf("Read result: <%+v>\n\n", res2)
 	// Read
 
 	// Update
-	// req3 := v1.UpdateRequest{
-
-	// 	Todo: &v1.Todo{
-	// 		Id:          "ble id",
-	// 		Title:       "ble title",
-	// 		Description: &wrappers.StringValue{Value: "ble desc"},
-	// 	},
-	// }
-	// res3, err := c.Update(ctx, &req3)
-	// if err != nil {
-	// 	log.Fatalf("Update failed: %v", err)
-	// }
-	// log.Printf("Update result: <%+v>\n\n", res3)
+	req3 := v1.UpdateRequest{
+		Todo: &v1.Todo{
+			Id:          id,
+			Description: &wrappers.StringValue{Value: "updated desc"},
+		},
+	}
+	res3, err := c.Update(ctx, &req3)
+	if err != nil {
+		log.Fatalf("Update failed: %v", err)
+	}
+	log.Printf("Update result: <%+v>\n\n", res3)
 	// Update
 
 	// Call ReadAll

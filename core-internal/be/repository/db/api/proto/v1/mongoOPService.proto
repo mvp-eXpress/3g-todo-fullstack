@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-gotag/tagger/tagger.proto";
+
+message Empty {};
+
+enum TYPE{
+	BOOLEAN=1;
+	DOUBLE=2;
+	INT32=3;
+	INT64=4;
+	STRING=5;
+	TIMESTAMP=6;
+}
+
+enum INDEX_ORDER{
+	ASCENDING=1;
+	DESCENDING=2;
+}
+
+service MongoOPService {
+  rpc CreateCollection(CreateCollectionRequest)
+      returns (CreateCollectionResponse) {}
+  rpc ListCollections(Empty) returns (ListCollectionsResponse) {}
+}
+
+message FieldValue [
+	TYPE valueType=1;
+	string fieldName=2;
+	bool isUnique=3;
+	bool isIndexed=4;
+
+]
+
+message CreateCollectionRequest {
+	string collectionName=1;
+
+}
