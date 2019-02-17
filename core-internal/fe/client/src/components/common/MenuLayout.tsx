@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import Layout from 'antd/lib/layout';
-import Menu from 'antd/lib/menu';
-import Icon from 'antd/lib/icon';
-import Breadcrumb from 'antd/lib/breadcrumb';
-import SubMenu from 'antd/lib/menu/SubMenu';
-import Repository from '../respository/Repository';
-const { Header, Content, Footer, Sider } = Layout;
+import { Layout, Menu, Icon, Breadcrumb } from 'antd';
 
-const MenuLayout = () => {
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
+
+const MenuLayout = (props: { children: React.ReactChild }) => {
   const [collapsed, setCollapse] = useState(false);
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -74,7 +71,7 @@ const MenuLayout = () => {
               margin: '16px 0'
             }}
           >
-            <Repository />
+            {props.children}
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>

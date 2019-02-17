@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
-import Row from 'antd/lib/row';
-import Col from 'antd/lib/col';
-import Card from 'antd/lib/card';
-import Statistic from 'antd/lib/statistic';
-import Icon from 'antd/lib/icon';
+import { Row, Col, Statistic, Icon, Card } from 'antd';
 
 const Repository = () => {
   return (
