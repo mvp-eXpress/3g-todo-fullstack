@@ -2,41 +2,63 @@ syntax = "proto3";
 
 package v1;
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
+// import "google/protobuf/timestamp.proto";
+// import "google/protobuf/wrappers.proto";
 import "protoc-gen-gotag/tagger/tagger.proto";
 
 message Empty {};
 
 enum TYPE{
-	BOOLEAN=1;
-	DOUBLE=2;
-	INT32=3;
-	INT64=4;
-	STRING=5;
-	TIMESTAMP=6;
+	BOOLEAN=0;
+	DOUBLE=1;
+	INT32=2;
+	INT64=3;
+	STRING=4;
+	TIMESTAMP=5;
 }
 
 enum INDEX_ORDER{
-	ASCENDING=1;
-	DESCENDING=2;
+	ASCENDING=0;
+	DESCENDING=1;
 }
 
 service MongoOPService {
-  rpc CreateCollection(CreateCollectionRequest)
-      returns (CreateCollectionResponse) {}
-  rpc ListCollections(Empty) returns (ListCollectionsResponse) {}
+	rpc TestWorld(TestWorldRequest) returns (TestWorldResponse) {}
+	rpc CreateCollection(CreateCollectionRequest)
+	    returns (CreateCollectionResponse) {}
+	rpc ListCollections(Empty) returns (ListCollectionsResponse) {}
 }
 
-message FieldValue [
+message TestWorldRequest{
+	string msg=1; 
+}
+
+message TestWorldResponse{
+	string msg=1;
+}
+
+message FieldValue {
 	TYPE valueType=1;
 	string fieldName=2;
 	bool isUnique=3;
 	bool isIndexed=4;
+}
 
-]
+message ListCollectionsResponse{
+	repeated Collection collections =1;
+}
+
+message Collection {
+	string id=1;
+	string name=2;
+	bool status=3;
+	string host=4;
+	repeated FieldValue FieldValues=5;
+}
 
 message CreateCollectionRequest {
-	string collectionName=1;
-
+	Collection collection =1;
+}
+message CreateCollectionResponse {
+	Collection collection =1;
 }

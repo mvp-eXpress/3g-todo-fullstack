@@ -75,7 +75,7 @@ const MenuLayout = (props: { children: React.ReactChild }) => {
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2018 Created by Ant UED
+          mvp.express Copyright 2019 rohanray@outlook.com
         </Footer>
       </Layout>
     </Layout>

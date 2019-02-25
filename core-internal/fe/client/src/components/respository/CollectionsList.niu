@@ -1,0 +1,135 @@
+import React from 'react';
+import { Avatar, Icon, Card, Button, List, Dropdown, Menu } from 'antd';
+
+// const extraContent = (
+//   <div className={styles.extraContent}>
+//     <RadioGroup defaultValue="all">
+//       <RadioButton value="all">全部</RadioButton>
+//       <RadioButton value="progress">进行中</RadioButton>
+//       <RadioButton value="waiting">等待中</RadioButton>
+//     </RadioGroup>
+//     <Search className={styles.extraContentSearch} placeholder="请输入" onSearch={() => ({})} />
+//   </div>
+// );
+
+// const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
+//   <div className={styles.listContent}>
+//     <div className={styles.listContentItem}>
+//       <span>Owner</span>
+//       <p>{owner}</p>
+//     </div>
+//     <div className={styles.listContentItem}>
+//       <span>开始时间</span>
+//       <p>{moment(createdAt).format("YYYY-MM-DD HH:mm")}</p>
+//     </div>
+//     <div className={styles.listContentItem}>
+//       <Progress
+//         percent={percent}
+//         status={status}
+//         strokeWidth={6}
+//         style={{ width: 180 }}
+//       />
+//     </div>
+//   </div>
+// );
+
+const MoreBtn = (props: any) => (
+  <Dropdown
+    overlay={
+      <Menu>
+        <Menu.Item key="edit">编辑</Menu.Item>
+        <Menu.Item key="delete">删除</Menu.Item>
+      </Menu>
+    }
+  >
+    <a>
+      更多 <Icon type="down" />
+    </a>
+  </Dropdown>
+);
+
+const data = [
+  {
+    key: '1',
+    name: 'Mike',
+    age: 32,
+    address: '10 Downing Street'
+  },
+  {
+    key: '2',
+    name: 'John',
+    age: 42,
+    address: '10 Downing Street'
+  }
+];
+
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name'
+  },
+  {
+    title: 'Age',
+    dataIndex: 'age',
+    key: 'age'
+  },
+  {
+    title: 'Address',
+    dataIndex: 'address',
+    key: 'address'
+  }
+];
+
+const CollectionsList = () => {
+  return (
+    <Card
+      bordered={false}
+      title={'Collections'}
+      style={{ marginTop: 24 }}
+      bodyStyle={{ padding: '0 32px 40px 32px' }}
+    >
+      <Button
+        type="dashed"
+        style={{ width: '100%', marginBottom: 8 }}
+        icon="plus"
+      >
+        Add New
+      </Button>
+
+      {/* <List
+        size="large"
+        rowKey="id"
+        // loading={loading}
+        // pagination={paginationProps}
+        // dataSource={list}
+        renderItem={item => (
+          <List.Item
+            actions={[
+              <a
+                onClick={e => {
+                  e.preventDefault();
+                  console.dir(item);
+                  // this.showEditModal(item);
+                }}
+              >
+                Edit
+              </a>,
+              <MoreBtn current={item} />
+            ]}
+          >
+            <List.Item.Meta
+              avatar={<Avatar src={item.logo} shape="square" size="large" />}
+              title={<a href={item.href}>{item.title}</a>}
+              description={item.subDescription}
+            />
+            <ListContent data={item} />
+          </List.Item>
+        )}
+      /> */}
+    </Card>
+  );
+  // return <Table dataSource={dataSource} columns={columns} />;
+};
+
+export default CollectionsList;

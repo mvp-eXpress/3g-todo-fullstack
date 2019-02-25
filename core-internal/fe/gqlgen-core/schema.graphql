@@ -1,0 +1,45 @@
+type Query {
+  getCollections: [Collection]
+}
+
+type Mutation {
+  createCollection(input: CreateCollectionInput!): Collection
+  queryCollection(input: )
+}
+
+type Collection {
+  id: ID!
+  name: String!
+  status: Boolean!
+  host: String!
+  fieldValues: [FieldValue]
+}
+
+type FieldValue {
+  valueType: VALUE_TYPE
+  fieldName: String
+  isUnique: Boolean
+  isIndexed: Boolean
+}
+
+enum VALUE_TYPE {
+  BOOLEAN
+  DOUBLE
+  INT32
+  INT64
+  STRING
+  TIMESTAMP
+}
+
+input FieldValueInput {
+  valueType: VALUE_TYPE
+  fieldName: String
+  isUnique: Boolean
+  isIndexed: Boolean
+}
+
+input CreateCollectionInput {
+  name: String!
+  host: String!
+  fieldValues: [FieldValueInput]
+}
