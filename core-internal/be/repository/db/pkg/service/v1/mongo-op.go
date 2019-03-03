@@ -34,14 +34,10 @@ func (s *mongoOpServiceServer) ListCollections(ctx context.Context, req *v1.Empt
 	if err != nil {
 		// log.Fatalf("ListCollections: %#v", err)
 		// return nil, err
-
 		return nil, fmt.Errorf("readTasks: couldn't list all to-dos: %v", err)
-
 	}
-
 	log.Printf("curr: %v", cur)
 	defer cur.Close(ctx)
-
 	for cur.Next(ctx) {
 		myColl := &v1.Collection{}
 		err := cur.Decode(myColl)
@@ -49,9 +45,7 @@ func (s *mongoOpServiceServer) ListCollections(ctx context.Context, req *v1.Empt
 			log.Fatal("Decode error ", err)
 		}
 		list = append(list, myColl)
-
 	}
-
 	return &v1.ListCollectionsResponse{
 		Collections: list,
 	}, nil
