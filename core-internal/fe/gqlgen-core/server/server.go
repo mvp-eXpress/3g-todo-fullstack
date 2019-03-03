@@ -12,6 +12,10 @@ import (
 
 const defaultPort = "8080"
 
+type Config struct {
+	GrpcServiceuRL string `envconfig:"SERVICE_URL"`
+}
+
 func main() {
 	var cfg Config
 	err := envconfig.Process("", &cfg)
@@ -19,7 +23,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	s, err := graph.NewGraphQLServer(cfg.grpcURL)
+	s, err := graph.NewGraphQLServer(cfg.GrpcServiceuRL)
 	if err != nil {
 		log.Fatal(err)
 	}
