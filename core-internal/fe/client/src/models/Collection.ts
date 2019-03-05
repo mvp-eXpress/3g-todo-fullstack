@@ -1,5 +1,6 @@
 export declare type Collection = {
+  id: string;
   name: string;
-  status: boolean;
+  status?: boolean;
   host: string;
 };

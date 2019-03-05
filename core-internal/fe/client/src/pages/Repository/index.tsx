@@ -8,7 +8,7 @@ const RepositoryList = () => {
     <>
       {/* <Repository /> */}
       <CollectionsList />
-      <CollectionsTable />
+      {/* <CollectionsTable /> */}
     </>
   );
 };

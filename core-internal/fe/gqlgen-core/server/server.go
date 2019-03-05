@@ -5,9 +5,10 @@ import (
 	"net/http"
 
 	"github.com/99designs/gqlgen/handler"
+	"github.com/go-chi/chi"
 	"github.com/kelseyhightower/envconfig"
 	graph "github.com/mvp-eXpress/3g-todo-fullstack/core-internal/fe/gqlgen-core/pkg/resolver/v1"
-	// "github.com/tinrab/spidey/graphql/graph"
+	"github.com/rs/cors"
 )
 
 const defaultPort = "8080"
@@ -17,6 +18,7 @@ type Config struct {
 }
 
 func main() {
+
 	var cfg Config
 	err := envconfig.Process("", &cfg)
 	if err != nil {
@@ -28,21 +30,18 @@ func main() {
 		log.Fatal(err)
 	}
 
-	http.Handle("/playground", handler.Playground("GraphQL playground", "/graphql"))
-	http.Handle("/graphql", handler.GraphQL(s.ToExecutableSchema()))
+	router := chi.NewRouter()
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	// Add CORS middleware around every request
+	// See https://github.com/rs/cors for full option listing
+	router.Use(cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost:3000"},
+		AllowCredentials: true,
+		Debug:            true,
+	}).Handler)
+
+	router.Handle("/playground", handler.Playground("GraphQL playground", "/graphql"))
+	router.Handle("/graphql", handler.GraphQL(s.ToExecutableSchema()))
+
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
-
-// func main() {
-// 	port := os.Getenv("PORT")
-// 	if port == "" {
-// 		port = defaultPort
-// 	}
-
-// 	http.Handle("/", handler.Playground("GraphQL playground", "/query"))
-// 	http.Handle("/query", handler.GraphQL(gqlgen_core.NewExecutableSchema(gqlgen_core.Config{Resolvers: &gqlgen_core.Resolver{}})))
-
-// 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
-// 	log.Fatal(http.ListenAndServe(":"+port, nil))
-// }
