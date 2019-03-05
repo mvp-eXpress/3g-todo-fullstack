@@ -1,4 +1,4 @@
-import React, { ReactPropTypes } from 'react';
+import React from 'react';
 import { Avatar, List } from 'antd';
 import { Collection } from '../../models/Collection';
 import { Query } from 'react-apollo';
